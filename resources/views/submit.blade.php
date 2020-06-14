@@ -120,12 +120,25 @@
                         </div>
 
                         <div class="input__box">
+                        <label for="quantity">Stock:</label>
+                         <input type="number" id="quantity" name="quantity" min="1" max="10" class="form-controlr">
+                         </div>
+
+                         <div class="input__box">
+                         <span>Select Types:</span><br/>
+                            <input type="checkbox" name='type' value="sell"> Sell <br/>
+                            <input type="checkbox" name='type' value="rent"> Rent <br/>
+                            </div>
+                        <div class="input__box">
+
                             <label for="image" >{{ __('Image ') }}<span>*</span></label>
 
                             <div>
                                 <input id="image" type="file" name="image" class="form-control"  />
                             </div>
                         </div>
+
+
 
                         <div class="form__btn">
                             <div>
@@ -151,17 +164,19 @@ if (isset($_POST['submit']))
     $author = $_POST['author'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $stock = $_POST['quantity'];
+    $type = $_POST['type'];
   
     if(isset($_FILES['image'])){
         $name = $_FILES['image']['name'];
         $temp= $_FILES['image']['tmp_name'];
-        $location ="C:/xampp/htdocs/manpro/BookMe-master/public/images/books/";
+        $location ="C:/xampp/htdocs/manpro/bookme20/public/images/books/";
         move_uploaded_file($temp,$location.$name);
     }
    
    
     //move_uploaded_file($_FILES['image']['temp_name'], "public/images/product/$image");
-    $insert = "insert into products values('NULL','NULL','NULL','images/books/$name','$title','$author','$description','$price')";
+    $insert = "insert into products values('NULL','NULL','NULL','images/books/$name','$title','$author','$description','$price','$stock','$type')";
    // mysqli_query($con,$insert);
     if(mysqli_query($con,$insert)){
         echo "<script>alert('Product Submitted')</script>";
